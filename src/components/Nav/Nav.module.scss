@@ -1,0 +1,12 @@
+.navList {
+  display: flex;
+}
+
+.navListLink {
+  color: var(--white);
+  padding: 0.875rem;
+
+  &:last-of-type {
+    padding-right: 0;
+  }
+}

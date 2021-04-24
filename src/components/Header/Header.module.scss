@@ -1,0 +1,19 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 0;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.activeHeader {
+  background-color: #e08976;
+  box-shadow: 0 0.5rem 1.5rem 0 rgba(39, 70, 84, 0.12);
+}
+
+.headerInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
