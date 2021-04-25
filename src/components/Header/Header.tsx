@@ -7,8 +7,11 @@ import cn from "classnames"
 
 import Container from "../Container"
 import Nav from "../Nav"
+import Icon from "../Icon"
+import { DesktopUp, DesktopDown } from "../../ui/responsive"
 
 import * as styles from "./Header.module.scss"
+import Menu from "../Menu"
 
 const Header = () => {
   const data = useStaticQuery(graphql`
@@ -40,7 +43,7 @@ const Header = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
   const [activeHeader, setActiveHeader] = useState(false)
 
-  const isDesktopLg = useMediaQuery({ query: `(min-width: 1024px)` })
+  const isDesktop = useMediaQuery({ query: `(min-width: 769px)` })
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -66,10 +69,13 @@ const Header = () => {
   }, [menuIsOpen])
 
   useEffect(() => {
-    if (isDesktopLg) {
+    if (isDesktop) {
       setMenuIsOpen(false)
     }
-  }, [isDesktopLg])
+    setScrollbarWidth(window.innerWidth - document.body.offsetWidth)
+  }, [isDesktop])
+
+  const [scrollbarWidth, setScrollbarWidth] = useState(0)
 
   return (
     <header
@@ -79,10 +85,37 @@ const Header = () => {
         <Link to={logoLink}>
           <img src={file.url} alt={title} />
         </Link>
-        <Nav links={links} />
-      </Container>
 
-      
+        {isDesktop && <Nav links={links} />}
+        {!isDesktop && (
+          <div>
+            <button
+              className={styles.headerToggle}
+              onClick={() => setMenuIsOpen(!menuIsOpen)}
+            >
+              <Icon name="burger" fill="#fff" />
+            </button>
+          </div>
+        )}
+
+        {menuIsOpen && (
+          <Menu closeModal={() => setMenuIsOpen(false)}>
+            <div className={cn(styles.header, styles.headerMenu)}>
+              <Container className={styles.headerToggleContainer}>
+                <button
+                  className={styles.headerToggle}
+                  onClick={() => setMenuIsOpen(!menuIsOpen)}
+                  style={{ marginRight: scrollbarWidth }}
+                >
+                  <Icon name="close" fill="#fff" />
+                </button>
+              </Container>
+            </div>
+
+            <Nav links={links} orientation="vertical" />
+          </Menu>
+        )}
+      </Container>
     </header>
   )
 }

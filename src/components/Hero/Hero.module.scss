@@ -1,0 +1,52 @@
+.hero {
+  height: 420px;
+  background-color: burlywood;
+  top: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+  }
+}
+
+.heroBannerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 3;
+}
+
+.heroHeadline {
+  display: block;
+  text-align: center;
+  font-size: 3rem;
+
+  span {
+    display: block;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+}

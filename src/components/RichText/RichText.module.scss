@@ -1,0 +1,28 @@
+.tableContainer {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.table {
+  border: 1px solid var(--black);
+  width: 100%;
+  margin-top: 3rem;
+  min-width: 43.75rem;
+
+  tbody {
+    tr {
+      &:first-of-type {
+        padding: 1rem;
+        color: var(--white);
+        background-color: var(--secondary-darkest);
+      }
+
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+      td {
+        padding: 1rem;
+      }
+    }
+  }
+}

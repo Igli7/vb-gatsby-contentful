@@ -1,6 +1,7 @@
 import React from "react"
 
 import { Link } from "gatsby"
+import cn from "classnames"
 
 import * as styles from "./Nav.module.scss"
 
@@ -10,15 +11,16 @@ interface ILink {
 }
 
 interface INav {
-  links: ILink
+  links: ILink[]
+  orientation?: "horizontal" | "vertical"
 }
 
-const Nav = ({ links }: INav) => {
+const Nav = ({ links, orientation }: INav) => {
   return (
-    <nav>
+    <nav className={cn({ [styles.navVertical]: orientation === "vertical" })}>
       <ul className={styles.navList}>
         {links.map((link: ILink, i: number) => (
-          <li key={i} className={styles.navListLink}>
+          <li key={i} className={styles.navListItem}>
             <Link className={styles.navListLink} to={link.link}>
               {link.name}
             </Link>
