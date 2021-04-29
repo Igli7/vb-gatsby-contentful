@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/Layout"
 import Hero from "../components/Hero"
+import Container from "../components/Container"
 
 import "../scss/index.scss"
 
@@ -30,8 +31,10 @@ const Index = () => {
   return (
     <Layout>
       <Hero data={hero} tag="h1" />
-      <h1>{title}</h1>
-      <div style={{ height: "900px" }}></div>
+      <Container>
+        <h1>{title}</h1>
+        <div style={{ height: "900px" }}></div>
+      </Container>
     </Layout>
   )
 }

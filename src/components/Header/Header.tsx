@@ -8,10 +8,9 @@ import cn from "classnames"
 import Container from "../Container"
 import Nav from "../Nav"
 import Icon from "../Icon"
-import { DesktopUp, DesktopDown } from "../../ui/responsive"
+import Menu from "../Menu"
 
 import * as styles from "./Header.module.scss"
-import Menu from "../Menu"
 
 const Header = () => {
   const data = useStaticQuery(graphql`

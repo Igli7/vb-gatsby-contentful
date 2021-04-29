@@ -19,13 +19,19 @@ const Nav = ({ links, orientation }: INav) => {
   return (
     <nav className={cn({ [styles.navVertical]: orientation === "vertical" })}>
       <ul className={styles.navList}>
-        {links.map((link: ILink, i: number) => (
-          <li key={i} className={styles.navListItem}>
-            <Link className={styles.navListLink} to={link.link}>
-              {link.name}
-            </Link>
-          </li>
-        ))}
+        {links &&
+          links.map((link: ILink, i: number) => (
+            <li key={i} className={styles.navListItem}>
+              <Link
+                className={styles.navListLink}
+                to={link.link}
+                activeClassName={styles.navListLinkActive}
+                partiallyActive={true}
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
       </ul>
     </nav>
   )

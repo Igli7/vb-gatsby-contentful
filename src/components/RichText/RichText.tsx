@@ -56,7 +56,7 @@ const RichText = ({ richText, className }: IRichText) => {
       },
     },
     renderNode: {
-      [BLOCKS.PARAGRAPH]: (children: React.ReactNode) => {
+      [BLOCKS.PARAGRAPH]: (node: any, children: any) => {
         return <Text>{children}</Text>
       },
 
@@ -102,7 +102,7 @@ const RichText = ({ richText, className }: IRichText) => {
   }
 
   return (
-    <div className={cn("richText", className)}>
+    <div className={cn("richText", styles.richTextContainer, className)}>
       {renderRichText(richText, options)}
     </div>
   )

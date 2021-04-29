@@ -26,13 +26,21 @@ module.exports = {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
+    siteUrl: "https://yourwebsite.com", // to be changed
   },
   plugins: [
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: "gatsby-source-contentful",
-      options: contentfulConfig,
+      optionalDependencies: `gatsby-plugin-sharp`,
+      options: {
+        ...contentfulConfig,
+        optionalDependencies: `gatsby-plugin-sharp`,
+      }, // to be changed
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -41,8 +49,21 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://yourwebsite.com", // to be changed
+        sitemap: "https://yourwebsite.com/sitemap.xml", // to be changed
+        policy: [{ userAgent: "*", allow: "*" }],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-helmet-canonical-urls`,
+      options: {
+        siteUrl: `https://yourwebsite.com`, // to be changed
+      },
+    },
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -53,6 +74,28 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-gdpr-cookies`,
+      options: {
+        googleAnalytics: {
+          trackingId: "YOUR_GOOGLE_ANALYTICS_TRACKING_ID", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-google-analytics", // default
+          anonymize: true, // default
+          allowAdFeatures: false, // default
+        },
+        googleTagManager: {
+          trackingId: "YOUR_GOOGLE_TAG_MANAGER_TRACKING_ID", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-google-tagmanager", // default
+          dataLayerName: "dataLayer", // default
+        },
+        facebookPixel: {
+          pixelId: "YOUR_FACEBOOK_PIXEL_ID", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-facebook-pixel", // default
+        },
+        // defines the environments where the tracking should be available  - default is ["production"]
+        environments: ["production", "development"],
       },
     },
     "gatsby-plugin-sass",
